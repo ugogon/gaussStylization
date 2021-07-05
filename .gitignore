@@ -1,0 +1,15 @@
+.DS_Store
+.vscode
+**/build
+development/cubicStylization_ImGui/*.obj
+.ccls-cache
+compile_commands.json
+__pycache__/
+config.cfg
+*.blend
+cubicStylization_cmd/output/*.obj*
+cubicStylization_cmd/output/*.png
+untracked/*
+# visual studio
+.vs/
+**/CMAKESettings.json
