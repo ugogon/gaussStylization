@@ -19,6 +19,15 @@ void gauss_style_single_iteration(
   MatrixXd E_target_edges_rhs = MatrixXd::Zero(V.rows(), 3);
   int edges_cnt = data.EFList.rows();
   int faces_cnt = data.FEList.rows();
+  data.e_ij_stars = MatrixXd::Zero(edges_cnt,3);
+  igl::parallel_for(edges_cnt,
+    [&data, &U](const int i) {
+      int v1 = data.EVList(i,0);
+      int v2 = data.EVList(i,1);
+      data.e_ij_stars.row(i) = U.row(v2) - U.row(v1);
+    });
+
+  data.nf_stars = newNormals;
 
   MatrixXd A_stars = Matrix<double,3,Dynamic>::Zero(3,3*faces_cnt);
 
