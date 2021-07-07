@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
   auto remove_style = [&](int k) {
     assert(gauss_data.mu.size() > 1);
     for (size_t i = 0; i < gauss_data.FGroups.size(); i++) {
-      if (gauss_data.FGroups(i) > k){
+      if (gauss_data.FGroups(i) >= max(k,1)){
         gauss_data.FGroups(i) -= 1;
       }
     }
@@ -819,7 +819,7 @@ int main(int argc, char *argv[])
       if (k != 0 || gauss_data.n_weights.size() > 1){
         ImGui::SameLine();
         if (ImGui::Button(("x##"+std::to_string(k)).c_str(), ImVec2(20, 0))) {
-          if (state.group >= k){
+          if (state.group >= k && state.group != 0){
             state.group = state.group-1;
           }
           remove_style(k);
